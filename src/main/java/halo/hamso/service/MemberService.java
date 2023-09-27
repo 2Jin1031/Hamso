@@ -1,10 +1,10 @@
 package halo.hamso.service;
 
-import likelion.halo.hamso.domain.Member;
-import likelion.halo.hamso.dto.member.MemberDto;
-import likelion.halo.hamso.dto.member.MemberUpdateAllDto;
-import likelion.halo.hamso.exception.NotFoundException;
-import likelion.halo.hamso.repository.MemberRepository;
+import halo.hamso.domain.Member;
+import halo.hamso.dto.member.MemberDto;
+import halo.hamso.dto.member.MemberUpdateAllDto;
+import halo.hamso.exception.NotFoundException;
+import halo.hamso.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -63,10 +63,10 @@ public class MemberService {
             throw new NotFoundException("Member not found with loginId: " + memberInfo.getLoginId());
         } else {
             Member member = oMember.get();
-            member.setEmail(memberInfo.getEmail());
             member.setPhoneNo(memberInfo.getPhoneNo());
-            member.setAddress(memberInfo.getAddress());
-            member.setSpecificAddress(memberInfo.getSpecificAddress());
+            member.setType(memberInfo.getType());
+            member.setAffiliation(memberInfo.getAffiliation());
+            member.getMoney(memberInfo.getMoney());
         }
 
     }

@@ -1,7 +1,7 @@
 package halo.hamso.argumentresolver;
 
-import likelion.halo.hamso.domain.Member;
-import likelion.halo.hamso.service.MemberService;
+import halo.hamso.domain.Member;
+import halo.hamso.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.Authentication;

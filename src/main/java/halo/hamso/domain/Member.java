@@ -1,12 +1,13 @@
 package halo.hamso.domain;
 
 import jakarta.persistence.*;
-import likelion.halo.hamso.dto.member.MemberJoinDto;
+import halo.hamso.dto.member.MemberJoinDto;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.management.relation.RelationType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,35 +25,31 @@ public class Member implements UserDetails {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(name = "login_id", unique = true)
-    private String loginId; // 로그인 아이디
+    @Column(name = "name")
+    private String name; // 회원의 이름
+
+    @Column(name = "phn", unique = true)
+    private String phoneNo; // 전화번호(아이디)
 
     @Column(name = "pwd")
     private String password; // 비밀번호
 
-    @Column(name = "name")
-    private String name; // 회원의 이름
+    @Column(name="relation")
+    private RelationType type; // 관계
 
-    @Column(name = "phn")
-    private String phoneNo; // 전화번호
+    @Column(name = "affiliation")
+    private String affiliation; // 소속
 
-    @Column(name="email")
-    private String email; // 이메일
-
-    @Column(name = "address")
-    private String address; // 도로명주소
-
-    @Column(name = "specific_address")
-    private String specificAddress; // 상세주소
+    @Column(name = "money")
+    private Integer money; // 조의금
 
     public Member(MemberJoinDto memberInfo) {
-        this.loginId = memberInfo.getLoginId();
         this.name = memberInfo.getName();
         this.phoneNo = memberInfo.getPhoneNo();
-        this.email = memberInfo.getEmail();
         this.password = memberInfo.getPassword();
-        this.address = memberInfo.getAddress();
-        this.specificAddress = memberInfo.getSpecificAddress();
+        //this.type = memberInfo.g
+        this.affiliation = memberInfo.getAffiliation();
+        this.money = memberInfo.getMoney();
     }
 
     @ElementCollection(fetch = FetchType.EAGER)
