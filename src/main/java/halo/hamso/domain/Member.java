@@ -62,10 +62,9 @@ public class Member implements UserDetails {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
-
     @Override
     public String getUsername() {
-        return loginId;
+        return phoneNo;
     }
     @Override
     public String getPassword() {
@@ -91,8 +90,4 @@ public class Member implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    @ToString.Exclude
-    private List<Reservation> reservationList;
 }

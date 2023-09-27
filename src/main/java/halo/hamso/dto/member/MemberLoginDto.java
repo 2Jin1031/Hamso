@@ -10,6 +10,6 @@ import lombok.ToString;
 @Getter
 @ToString
 public class MemberLoginDto {
-    private String loginId; // 로그인 아이디
+    private String phoneNo; // 전화번호(아이디)
     private String password;
 }

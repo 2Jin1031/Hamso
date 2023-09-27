@@ -10,12 +10,12 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long>  {
-    Optional<Member> findByLoginId(String loginId);
+    Optional<Member> findByPhoneNo(String phoneNo);
 
     @Query("select count(m) from Member m where m.phoneNo=:phoneNo")
     int getCountPhoneNo(@Param("phoneNo")String phoneNo);
 
-    Optional<Member> findByPhoneNo(String phoneNo);
+    //Optional<Member> findByPhoneNo(String phoneNo);
 
     @Query("select m from Member m where m.name=:name and m.phoneNo=:phoneNo")
     Optional<Member> findByNameAndPhoneNo(String name, String phoneNo);

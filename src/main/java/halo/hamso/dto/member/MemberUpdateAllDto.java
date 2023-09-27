@@ -2,15 +2,16 @@ package halo.hamso.dto.member;
 
 import lombok.Data;
 
+import javax.management.relation.RelationType;
+
 @Data
 public class MemberUpdateAllDto {
-    private String loginId; // 로그인 아이디
 
     private String phoneNo; // 전화번호
 
-    private String email; // 이메일
+    private RelationType type; // 관계
 
-    private String address;
+    private String affiliation; // 소속
 
-    private String specificAddress;
+    private Integer money; // 조의금
 }

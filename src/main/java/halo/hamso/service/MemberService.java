@@ -23,27 +23,27 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder encoder;
 
-    public MemberDto findById(Long id){
-        Member member = memberRepository.findById(id).get();
-        MemberDto memberDto = new MemberDto(member);
-        return memberDto;
-    }
+//    public MemberDto findById(Long id){
+//        Member member = memberRepository.findById(id).get();
+//        MemberDto memberDto = new MemberDto(member);
+//        return memberDto;
+//    }
 
-    public MemberDto findByLoginId(String loginId){
-        Optional<Member> member = memberRepository.findByLoginId(loginId);
+    public MemberDto findByPhoneNo(String phoneNo){
+        Optional<Member> member = memberRepository.findByPhoneNo(phoneNo);
         if(member.isEmpty()) {
             // Member not found, handle accordingly
-            throw new NotFoundException("Member not found with loginId: " + loginId);
+            throw new NotFoundException("Member not found with phoneNo: " + phoneNo);
         } else {
             return new MemberDto(member.get());
         }
     }
 
-    public Member findByLoginIdForReal(String loginId){
-        Optional<Member> member = memberRepository.findByLoginId(loginId);
+    public Member findByPhoneNoForReal(String phoneNo){
+        Optional<Member> member = memberRepository.findByPhoneNo(phoneNo);
         if(member.isEmpty()) {
             // Member not found, handle accordingly
-            throw new NotFoundException("Member not found with loginId: " + loginId);
+            throw new NotFoundException("Member not found with phoneNo: " + phoneNo);
         } else {
             return member.get();
         }
@@ -57,26 +57,26 @@ public class MemberService {
 
     @Transactional
     public void updateMemberAll(MemberUpdateAllDto memberInfo) {
-        Optional<Member> oMember = memberRepository.findByLoginId(memberInfo.getLoginId());
+        Optional<Member> oMember = memberRepository.findByPhoneNo(memberInfo.getPhoneNo());
         if(oMember.isEmpty()) {
             // Member not found, handle accordingly
-            throw new NotFoundException("Member not found with loginId: " + memberInfo.getLoginId());
+            throw new NotFoundException("Member not found with phoneNo: " + memberInfo.getPhoneNo());
         } else {
             Member member = oMember.get();
             member.setPhoneNo(memberInfo.getPhoneNo());
             member.setType(memberInfo.getType());
             member.setAffiliation(memberInfo.getAffiliation());
-            member.getMoney(memberInfo.getMoney());
+            member.setMoney(memberInfo.getMoney());
         }
 
     }
 
     @Transactional
-    public void deleteMember(String loginId) {
-        Optional<Member> oMember = memberRepository.findByLoginId(loginId);
+    public void deleteMember(String phoneNo) {
+        Optional<Member> oMember = memberRepository.findByPhoneNo(phoneNo);
         if(oMember.isEmpty()) {
             // Member not found, handle accordingly
-            throw new NotFoundException("Member not found with loginId: " + loginId);
+            throw new NotFoundException("Member not found with phoneNo: " + phoneNo);
         } else {
             Member member = oMember.get();
             memberRepository.delete(member);
@@ -85,9 +85,9 @@ public class MemberService {
 
 //    @Transactional
 //    public void updatePassword(MemberLoginDto memberInfo) {
-//        Optional<Member> oMember = memberRepository.findByLoginId(memberInfo.getLoginId());
+//        Optional<Member> oMember = memberRepository.findByPhoneNo(memberInfo.getPhoneNo());
 //        if(oMember.isEmpty()) {
-//            throw new NotFoundException("Member not found with loginId: " + memberInfo.getLoginId());
+//            throw new NotFoundException("Member not found with phoneNo: " + memberInfo.getPhoneNo());
 //        } else {
 //            oMember.get().setPassword(memberInfo.getPassword());
 //        }
@@ -109,10 +109,10 @@ public class MemberService {
     }
 
     @Transactional
-    public Boolean updatePassword(String loginId, String oldPassword, String newPassword) {
-        Optional<Member> oMember = memberRepository.findByLoginId(loginId);
+    public Boolean updatePassword(String phoneNo, String oldPassword, String newPassword) {
+        Optional<Member> oMember = memberRepository.findByPhoneNo(phoneNo);
         if(oMember.isEmpty()) {
-            throw new NotFoundException("Member not found with loginId: " + loginId);
+            throw new NotFoundException("Member not found with phoneNo: " + phoneNo);
         }
         Member member = oMember.get();
 
